@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -22,14 +24,15 @@ public class Instrument {
 	private String condition;	// condition of the instrument
 	private String desc;		// description, additional info
 	
-	// @ManyToOne
-	//private Category category;	// category of the instrument;
+	@ManyToOne
+	@JoinColumn(name = "categoryid")
+	private Category category;	// category of the instrument;
 	
 	// NULL constructor
 	public Instrument() {
 		super();
 		this.id=null;
-		//this.category = null;
+		this.category = null;
 		this.brand = null;
 		this.model = null;
 		this.year = 0;
@@ -44,7 +47,7 @@ public class Instrument {
 			double priceBought, String condition, String desc) {
 		super();
 		this.id = id;
-		//this.category = category;
+		this.category = category;
 		this.brand = brand;
 		this.model = model;
 		this.year = year;
@@ -58,7 +61,7 @@ public class Instrument {
 	public Instrument(Category category, String brand, String model, int year, String serial, String dateAdded,
 			double priceBought, String condition, String desc) {
 		super();
-		//this.category = category;
+		this.category = category;
 		this.brand = brand;
 		this.model = model;
 		this.year = year;
@@ -73,9 +76,9 @@ public class Instrument {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	/*public void setCategory(Category category) {
+	public void setCategory(Category category) {
 		this.category = category;
-	}*/
+	}
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
@@ -105,9 +108,9 @@ public class Instrument {
 	public Long getId() {
 		return id;
 	}
-	/*public Category getCategory() {
+	public Category getCategory() {
 		return category;
-	}*/
+	}
 	public String getBrand() {
 		return brand;
 	}
@@ -135,7 +138,7 @@ public class Instrument {
 	
 	@Override
 	public String toString() {
-		return "Instrument [id=" + id + ", Category=" + /*category + */", brand=" + brand + ", model=" + model + ", year=" + year + ", serial="
+		return "Instrument [id=" + id + ", Category=" + category + ", brand=" + brand + ", model=" + model + ", year=" + year + ", serial="
 				+ serial + ", dateAdded=" + dateAdded + ", priceBought=" + priceBought + ", condition=" + condition
 				+ ", desc=" + desc + "]";
 	}
