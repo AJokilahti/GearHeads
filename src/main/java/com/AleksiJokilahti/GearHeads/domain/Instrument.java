@@ -22,17 +22,29 @@ public class Instrument {
 	private String condition;	// condition of the instrument
 	private String desc;		// description, additional info
 	
+	// @ManyToOne
+	//private Category category;	// category of the instrument;
 	
-	
+	// NULL constructor
 	public Instrument() {
 		super();
-		// TODO Auto-generated constructor stub
+		this.id=null;
+		//this.category = null;
+		this.brand = null;
+		this.model = null;
+		this.year = 0;
+		this.serial = null;
+		this.dateAdded = null;
+		this.priceBought = 0.00;
+		this.condition = null;
+		this.desc = null;
 	}
 	
-	public Instrument(Long id, String brand, String model, int year, String serial, String dateAdded,
+	public Instrument(Long id, Category category, String brand, String model, int year, String serial, String dateAdded,
 			double priceBought, String condition, String desc) {
 		super();
 		this.id = id;
+		//this.category = category;
 		this.brand = brand;
 		this.model = model;
 		this.year = year;
@@ -42,10 +54,11 @@ public class Instrument {
 		this.condition = condition;
 		this.desc = desc;
 	}
-	
-	public Instrument(String brand, String model, int year, String serial, String dateAdded,
+
+	public Instrument(Category category, String brand, String model, int year, String serial, String dateAdded,
 			double priceBought, String condition, String desc) {
 		super();
+		//this.category = category;
 		this.brand = brand;
 		this.model = model;
 		this.year = year;
@@ -60,6 +73,9 @@ public class Instrument {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	/*public void setCategory(Category category) {
+		this.category = category;
+	}*/
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
@@ -89,6 +105,9 @@ public class Instrument {
 	public Long getId() {
 		return id;
 	}
+	/*public Category getCategory() {
+		return category;
+	}*/
 	public String getBrand() {
 		return brand;
 	}
@@ -116,7 +135,7 @@ public class Instrument {
 	
 	@Override
 	public String toString() {
-		return "Instrument [id=" + id + ", brand=" + brand + ", model=" + model + ", year=" + year + ", serial="
+		return "Instrument [id=" + id + ", Category=" + /*category + */", brand=" + brand + ", model=" + model + ", year=" + year + ", serial="
 				+ serial + ", dateAdded=" + dateAdded + ", priceBought=" + priceBought + ", condition=" + condition
 				+ ", desc=" + desc + "]";
 	}
