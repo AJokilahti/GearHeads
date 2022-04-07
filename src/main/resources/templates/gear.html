@@ -6,7 +6,36 @@
 <title>GearHeads</title>
 </head>
 <body>
-	<h1>Welcome to GearHeads</h1>
+<div class="container">
+	<div class="col-md-4">
+		<h1>Welcome to GearHeads</h1>
+	</div>
 	<h2>Your gear:</h2>
+	<table class="table table-stripped" style="padding:20px 0">
+		<tr>
+			<th>Category</th>
+			<th>Brand</th>
+			<th>Model</th>
+			<th>Year</th>
+			<th>Serial</th>
+			<th>Date added</th>
+			<th>Price Bought</th>
+			<th>Condition</th>
+			<th>Description</th>
+		</tr>
+		
+		<tr th:each = "instrument : ${gear}">
+			<td th:text="${instrument.category.name}"></td>
+			<td th:text="${instrument.brand}"></td>
+			<td th:text="${instrument.model}"></td>
+			<td th:text="${instrument.year}"></td>
+			<td th:text="${instrument.serial}"></td>
+			<td th:text="${instrument.dateAdded}"></td>
+			<td th:text="${instrument.priceBought}"></td>
+			<td th:text="${instrument.condition}"></td>
+			<td th:text="${instrument.desc}"></td>
+		</tr>
+	</table>
+</div>
 </body>
 </html>
