@@ -20,7 +20,7 @@ public class GearController {
 	
 		@RequestMapping(value = "/gear", method = RequestMethod.GET)
 		public String Instruments(Model model) {
-			model.addAttribute("gear", instrumentrepository);
+			model.addAttribute("gear", instrumentrepository.findAll());
 			return "gear";
 		}
 		
