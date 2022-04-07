@@ -28,6 +28,11 @@ public class Category {
 		this.categoryId = null;
 		this.name = null;
 	}
+	
+	public Category(String name) {
+		super();
+		this.name = name;
+	}
 
 	public Category(Long categoryId, String name) {
 		super();
@@ -61,7 +66,10 @@ public class Category {
 		return instruments;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Category: [id: "  + categoryId + ", name: " + name + "]";
+	}
 	
 	
 }
