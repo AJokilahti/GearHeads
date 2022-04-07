@@ -16,10 +16,10 @@ public class Category {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long categoryId;	 // Auto generated id
-	private String name; // for example guitar, drums, mics
+	private Long categoryId;		// Auto generated id
+	private String name; 			// for example guitar, drums, mics
 	
-	@JsonIgnore		// ignores JSON for GET, prevents infinite loop
+	@JsonIgnore						// ignores JSON for GET, prevents infinite loop
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
 	private List<Instrument> instruments;
 	
