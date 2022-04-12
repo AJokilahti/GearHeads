@@ -3,6 +3,7 @@ package com.AleksiJokilahti.GearHeads.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -41,6 +42,15 @@ public class GearController {
 			System.out.println("TAPAHTUUKO MITÄÄN? " + instrument);
 			instrumentrepository.save(instrument);
 			return "redirect:gear";
+		}
+		
+		
+		
+		@RequestMapping(value="/editInstrument/{id}", method=RequestMethod.GET)
+		public String edit(@PathVariable("id") Long id, Model model) {
+			model.addAttribute("instrument", instrumentrepository.findById(id));
+			model.addAttribute("categories", categoryrepository.findAll());
+			return "editinstrument";
 		}
 		
 		

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit instrument</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   	<link rel="stylesheet" href="/assets/index.css">
+</head>
+<body>
+	<div>
+		<form style="vertical-align:middle; " class="form" th:object="${instrument}" th:action="@{save}" action="#" method="post">
+		<label for="id"></label>
+			<input type="hidden" id="id" th:field="*{id}" readonly="readonly" />
+			<p>
+		<label for="categorylist">Category</label>
+			 <select id="categorylist" th:field="*{category}" class="form-control">
+       			<option th:each="category: ${categories}" th:value="${category.categoryId}" th:text="${category.name}"></option>
+    		</select>
+		<p>
+		<label for="brand">Brand</label>
+		<input type="text" id="brand" th:field="*{brand}"/>
+		</p>
+		<p>
+		<label for="model">Model</label>
+		<input type="text" id="model" th:field="*{model}"/>
+		</p>
+		<p>
+		<label for="year">Year</label>
+		<input type="text" id="year" th:field="*{year}"/>
+		</p>
+		<p>
+		<label for="serial">Serial</label>
+		<input type="text" id="serial" th:field="*{serial}"/>
+		</p>
+		<p>
+		<label for="dateAdded">Date added</label>
+		<input type="date" id="dateAdded" th:field="*{dateAdded}"/>
+		</p>
+		<p>
+		<label for="priceBought">Price bought</label>
+		<input type="text" id="priceBought" th:field="*{priceBought}"/>
+		</p>
+		<p>
+		<label for="condition">Condition</label>
+		<input type="text" id="condition" th:field="*{condition}"/>
+		</p>
+		<p>
+		<label for="description">Description</label>
+		<input type="text" id="description" th:field="*{desc}"/>
+		</p>
+		
+		<p>
+		<input type="submit" class="btn btn-success" value="Save"></input>
+		</p>
+		</form>
+		
+		
+	</div>
+
+</body>
+</html>
