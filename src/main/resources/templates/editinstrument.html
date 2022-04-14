@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div>
-		<form style="vertical-align:middle; " class="form" th:object="${instrument}" th:action="@{save}" action="#" method="post">
+		<form style="vertical-align:middle; " class="form" th:object="${instrument}" th:action="@{/save}" action="#" method="post">
 		<label for="id"></label>
 			<input type="hidden" id="id" th:field="*{id}" readonly="readonly" />
 			<p>

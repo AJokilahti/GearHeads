@@ -30,6 +30,14 @@ public class GearController {
 			return "gear";
 		}
 		
+		// public String OwnerInstruments(Model model,  Principal principal) {
+		 //	String username = principal.getName(); //get logged in username
+
+	      //User user = userRepository.findByUsername(username);
+		//	model.addAttribute("gear", instrumentrepository.findByOwner(user));
+		//	return gear;
+//		}
+		
 		@RequestMapping(value = "/addinstrument")
 		public String addInstrument(Model model) {
 			model.addAttribute("instrument", new Instrument());
@@ -46,13 +54,17 @@ public class GearController {
 		
 		
 		
-		@RequestMapping(value="/editInstrument/{id}", method=RequestMethod.GET)
+		@RequestMapping(value="/editinfo/{id}")
 		public String edit(@PathVariable("id") Long id, Model model) {
 			model.addAttribute("instrument", instrumentrepository.findById(id));
 			model.addAttribute("categories", categoryrepository.findAll());
 			return "editinstrument";
 		}
 		
-		
+		@RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
+		public String delete(@PathVariable("id") Long id) {
+			instrumentrepository.deleteById(id);
+			return "redirect:../gear";
+		}
 		
 }

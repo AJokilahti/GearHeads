@@ -8,9 +8,12 @@
 <body>
 <div class="container">
 	<div class="col-md-4">
-		<h1>Welcome to GearHeads</h1>
+		<h3 th:inline="text">Welcome to GearHeads, [[${#httpServletRequest.remoteUser}]]</h3>
+		<form th:action="@{/logout}" method="post" style="padding:20px 0">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
 	</div>
-	<h2>Your gear:</h2>
+	<h4>Your gear:</h4>
 	<table class="table table-stripped" style="padding:20px 0">
 		<tr>
 			<th>Category</th>
@@ -30,12 +33,15 @@
 			<td th:text="${instrument.model}"></td>
 			<td th:text="${instrument.year}"></td>
 			<td th:text="${instrument.serial}"></td>
-			<td th:text="${instrument.dateAdded}"></td>
+			<td th:text="${instrument.dateAddedStr}"></td>
 			<td th:text="${instrument.priceBought}"></td>
 			<td th:text="${instrument.condition}"></td>
 			<td th:text="${instrument.desc}"></td>
+			<td><a th:href="@{/editinfo/{id}(id=${instrument.id})}">Edit</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${instrument.id})}" class="btn btn-danger">Delete</a></td>
 		</tr>
 	</table>
+	<a class="btn btn-success" href="/addinstrument" >Add Instrument</a>
 </div>
 </body>
 </html>
