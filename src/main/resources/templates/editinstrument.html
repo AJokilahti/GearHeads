@@ -11,6 +11,9 @@
 		<label for="id"></label>
 			<input type="hidden" id="id" th:field="*{id}" readonly="readonly" />
 			<p>
+		<label for="owner"></label>
+			<input type="hidden" id="owner" th:field="*{owner}" readonly="readonly" />
+			<p>
 		<label for="categorylist">Category</label>
 			 <select id="categorylist" th:field="*{category}" class="form-control">
        			<option th:each="category: ${categories}" th:value="${category.categoryId}" th:text="${category.name}"></option>

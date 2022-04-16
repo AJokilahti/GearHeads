@@ -1,5 +1,9 @@
 package com.AleksiJokilahti.GearHeads.domain;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -22,7 +24,9 @@ public class Instrument {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dateAdded;
 	
-	// PRIVATE USER OWNER
+	@ManyToOne
+	@JoinColumn(name = "userid")
+	private User owner;
 	
 	private String brand; 		// brand of the instrument (Fender, Ludwig, etc.)
 	private String model; 		// model of the instrument (Stratocaster, LM402, etc.
@@ -50,10 +54,26 @@ public class Instrument {
 		this.priceBought = 0.00;
 		this.condition = null;
 		this.desc = null;
+		this.owner = null;
+	}
+	
+	public Instrument(User owner) {
+		super();
+		this.id=null;
+		this.category = null;
+		this.brand = null;
+		this.model = null;
+		this.year = 0;
+		this.serial = null;
+		this.dateAdded = null;
+		this.priceBought = 0.00;
+		this.condition = null;
+		this.desc = null;
+		this.owner = owner;
 	}
 	
 	public Instrument(Long id, Category category, String brand, String model, int year, String serial, Date dateAdded,
-			double priceBought, String condition, String desc) {
+			double priceBought, String condition, String desc, User owner) {
 		super();
 		this.id = id;
 		this.category = category;
@@ -65,8 +85,24 @@ public class Instrument {
 		this.priceBought = priceBought;
 		this.condition = condition;
 		this.desc = desc;
+		this.owner = owner;
 	}
 
+	public Instrument(Category category, String brand, String model, int year, String serial, Date dateAdded,
+			double priceBought, String condition, String desc, User owner) {
+		super();
+		this.category = category;
+		this.brand = brand;
+		this.model = model;
+		this.year = year;
+		this.serial = serial;
+		this.dateAdded = dateAdded;
+		this.priceBought = priceBought;
+		this.condition = condition;
+		this.desc = desc;
+		this.owner = owner;
+	}
+	
 	public Instrument(Category category, String brand, String model, int year, String serial, Date dateAdded,
 			double priceBought, String condition, String desc) {
 		super();
@@ -113,6 +149,10 @@ public class Instrument {
 		this.desc = desc;
 	}
 	
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+
 	// GETTERS
 	public Long getId() {
 		return id;
@@ -149,12 +189,20 @@ public class Instrument {
 		return desc;
 	}
 	
+	public User getOwner() {
+		return owner;
+	}
+
 	@Override
 	public String toString() {
+		if(this.owner != null) {
+			return "Instrument [id=" + id + ", Category=" + category + ", brand=" + brand + ", model=" + model + ", year=" + year + ", serial="
+					+ serial + ", dateAdded=" + dateAdded + ", priceBought=" + priceBought + ", condition=" + condition
+					+ ", desc=" + desc + "]";
+			} else {
 		return "Instrument [id=" + id + ", Category=" + category + ", brand=" + brand + ", model=" + model + ", year=" + year + ", serial="
 				+ serial + ", dateAdded=" + dateAdded + ", priceBought=" + priceBought + ", condition=" + condition
-				+ ", desc=" + desc + "]";
+				+ ", desc=" + desc + ", owner=" + owner.getUsername() + "]";
+			}
 	}
-	
-	
 }

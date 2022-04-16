@@ -50,7 +50,9 @@ public class GearHeadsApplication {
 			
 			// CREATING A FEW instruments
 			instrumentrepository.save(new Instrument(category1, "Ludwig", "Supraphonic", 2021, "xyz1234567", java.util.Date.from( Instant.now() ),
-					799.99, "New", "A true classic"));//, user1
+					799.99, "New", "A true classic", user1));//, user1
+			instrumentrepository.save(new Instrument(category2, "Fender", "Stratocaster", 2006, "213456723", java.util.Date.from( Instant.now() ),
+					459.00, "Very good", "Sunburst, made in mexico", user2));//, user2
 			
 			log.info("fetch all instruments");
 			for(Instrument instrument : instrumentrepository.findAll()) {

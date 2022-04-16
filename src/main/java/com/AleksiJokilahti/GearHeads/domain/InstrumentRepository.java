@@ -8,5 +8,5 @@ public interface InstrumentRepository extends CrudRepository<Instrument, Long>{
 
 	List<Instrument> findByModel(String model);
 	
-	// findByOwner
+	List<Instrument> findByOwner(User user);
 }

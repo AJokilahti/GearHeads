@@ -1,6 +1,10 @@
 package com.AleksiJokilahti.GearHeads.domain;
 
+import java.util.List;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -8,8 +12,8 @@ public class User {
 	// ID, NOT NULL, NOT UPDATABLE
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name= "id", nullable=false, updatable=false)
-	private Long id;
+	@Column(name= "userid", nullable=false, updatable=false)
+	private Long userid;
 	
 	// USERNAME, NOT NULL, UNIQUE
 	@Column(name="username", nullable=false, unique=true)
@@ -27,6 +31,10 @@ public class User {
 	@Column(name="role", nullable=false)
 	private String role;
 	
+	@JsonIgnore						// ignores JSON for GET, prevents infinite loop
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+	private List<Instrument> instruments;
+	
 	// CONSTRUCTOR WITHOUT FIELDS
 	public User() {
 		
@@ -41,8 +49,8 @@ public class User {
 		this.role=role;
 	}
 
-	public Long getId() {
-		return id;
+	public Long getUserId() {
+		return userid;
 	}
 
 	public String getUsername() {
@@ -60,9 +68,13 @@ public class User {
 	public String getRole() {
 		return role;
 	}
+	
+	public List<Instrument> getInstruments() {
+		return instruments;
+	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserId(Long userid) {
+		this.userid = userid;
 	}
 
 	public void setUsername(String username) {
@@ -80,10 +92,14 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	public void setInstruments(List<Instrument> instruments) {
+		this.instruments = instruments;
+	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email + ", role="
+		return "User [id=" + userid + ", username=" + username + ", password=" + password + ", email=" + email + ", role="
 				+ role + "]";
 	}
 	
