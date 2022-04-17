@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet" href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Categories</h1>
+<table class="table table-stripped">
+	<tr>
+		<th>Name</th>
+	</tr>
+	<tr th:each = "category: ${categorylist}">
+		<td th:text="${category.name}"></td>
+		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deletecategory/{id}(id=${category.categoryId})}" class="btn btn-danger">Delete</a></td>
+	</tr>
+	
+</table>
+<a class="btn btn-success" href="/addcategory" >Add category</a>
+<a class="btn btn-success" href="/gear" >Home</a>
+</body>
+</html>

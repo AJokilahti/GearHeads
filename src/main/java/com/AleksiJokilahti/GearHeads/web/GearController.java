@@ -4,6 +4,7 @@ import java.security.Principal;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,6 +52,7 @@ public class GearController {
 			return "gear";
 		}
 		
+		@PreAuthorize("hasAuthority('USER')")
 		@RequestMapping(value = "/addinstrument")
 		public String addInstrument(Model model, Principal principal) {
 			String username = principal.getName(); //get logged in username
@@ -63,6 +65,7 @@ public class GearController {
 			return "addinstrument";
 		}
 		
+		@PreAuthorize("hasAuthority('USER')")
 		@RequestMapping(value = "/save", method = RequestMethod.POST)
 		public String save(Instrument instrument) {
 			System.out.println("TAPAHTUUKO MITÄÄN? " + instrument);
@@ -71,13 +74,14 @@ public class GearController {
 		}
 		
 		
-		
+		@PreAuthorize("hasAuthority('USER')")
 		@RequestMapping(value="/editinfo/{id}")
 		public String edit(@PathVariable("id") Long id, Model model) {
 			model.addAttribute("instrument", instrumentrepository.findById(id));
 			model.addAttribute("categories", categoryrepository.findAll());
 			return "editinstrument";
 		}
+		
 		
 		@RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
 		public String delete(@PathVariable("id") Long id) {

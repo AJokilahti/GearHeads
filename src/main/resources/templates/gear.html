@@ -37,11 +37,12 @@
 			<td th:text="${instrument.priceBought}"></td>
 			<td th:text="${instrument.condition}"></td>
 			<td th:text="${instrument.desc}"></td>
-			<td><a th:href="@{/editinfo/{id}(id=${instrument.id})}">Edit</a></td>
-			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${instrument.id})}" class="btn btn-danger">Delete</a></td>
+			<td sec:authorize="hasAuthority('USER')"><a th:href="@{/editinfo/{id}(id=${instrument.id})}">Edit</a></td>
+			<td sec:authorize="hasAuthority('USER')"><a th:href="@{/delete/{id}(id=${instrument.id})}" class="btn btn-danger">Delete</a></td>
 		</tr>
 	</table>
-	<a class="btn btn-success" href="/addinstrument" >Add Instrument</a>
+	<a sec:authorize="hasAuthority('USER')" class="btn btn-success" href="/addinstrument" >Add Instrument</a>
+	<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" href="/addcategory" >Add Category</a>
 </div>
 </body>
 </html>
